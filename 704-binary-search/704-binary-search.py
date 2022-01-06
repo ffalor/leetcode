@@ -10,7 +10,7 @@ class Solution(object):
 
         while left <= right:
             
-            pivot = (left+right)//2
+            pivot = left + (right-left)//2
                 
             if nums[pivot] == target:
                 return pivot
