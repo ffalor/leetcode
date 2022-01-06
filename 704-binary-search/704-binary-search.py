@@ -6,12 +6,11 @@ class Solution(object):
         :rtype: int
         """
         
-        left = 0
-        right = len(nums) - 1
-        
+        left, right = 0, len(nums) - 1
+
         while left <= right:
             
-            pivot = left+((right-left)>>1)
+            pivot = (left+right)//2
                 
             if nums[pivot] == target:
                 return pivot
