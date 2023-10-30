@@ -5,7 +5,7 @@ func groupAnagrams(strs []string) [][]string {
 		var count [26]int
 
 		for _, v := range v {
-			count[int(v)-int('a')] += 1
+			count[v-'a']++
 		}
 
 		m[count] = append(m[count], v)
