@@ -1,4 +1,4 @@
-func topKFrequent(nums []int, k int) []int {
+func topKFrequent(nums []int, k int) (res []int) {
 	countM := make(map[int]int)
 	freq := make([][]int, len(nums)+1)
 
@@ -10,15 +10,12 @@ func topKFrequent(nums []int, k int) []int {
 		freq[v] = append(freq[v], k)
 	}
 
-	result := make([]int, 0, k)
 	for i := len(freq) - 1; i > 0; i-- {
-		for _, v := range freq[i] {
-			result = append(result, v)
-			if len(result) == k {
-				return result
-			}
+		res = append(res, freq[i]...)
+		if len(res) == k {
+			return
 		}
 	}
 
-	return result
+	return
 }
