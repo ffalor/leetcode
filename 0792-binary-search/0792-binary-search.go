@@ -1,6 +1,5 @@
 func search(nums []int, target int) int {
-	left := 0
-	right := len(nums) - 1
+	left, right := 0, len(nums) - 1
 
 	for right >= left {
 		mid := (left + right) / 2
