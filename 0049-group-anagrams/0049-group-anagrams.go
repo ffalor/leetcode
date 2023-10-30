@@ -1,5 +1,5 @@
 func groupAnagrams(strs []string) [][]string {
-	res := make(map[[26]int][]string)
+	m := make(map[[26]int][]string)
 
 	for _, v := range strs {
 		var count [26]int
@@ -8,12 +8,11 @@ func groupAnagrams(strs []string) [][]string {
 			count[int(v)-int('a')] += 1
 		}
 
-		res[count] = append(res[count], v)
+		m[count] = append(m[count], v)
 	}
 
-	var result [][]string
-
-	for _, v := range res {
+	result := make([][]string, 0, len(m))
+	for _, v := range m {
 		result = append(result, v)
 	}
 
