@@ -1,29 +1,22 @@
 func isValidSudoku(board [][]byte) bool {
-	hashMap := map[string]bool{}
+	
+	var rows, columns, squares [9][9]bool
 
-	for r := 0; r < 9; r++ {
-		for c := 0; c < 9; c++ {
-			if board[r][c] == '.' {
-				continue
+	for i, row := range board {
+		for j, v := range row {
+			if v != '.' {
+				// 1 = 49
+				// 2 = 50... etc
+				k := int(v)-49
+				
+				// square index is i/3*3 + j/3 to allow us to map to the actual square in the 3x3 grid 
+				if rows[i][k] || columns[j][k] || squares[i/3*3 + j/3][k] {
+					return false
+				}
+				rows[i][k], columns[j][k], squares[i/3*3 + j/3][k] = true, true, true
 			}
 
-			rKey := fmt.Sprintf("%vr%d", board[r][c], r)
-			cKey := fmt.Sprintf("%v%d", board[r][c], c)
-			sqreKey := fmt.Sprintf("%vs%d-%d", board[r][c], r/3, c/3)
-
-			_, rOk := hashMap[rKey]
-			_, cOk := hashMap[cKey]
-			_, sOk := hashMap[sqreKey]
-
-			if rOk || cOk || sOk {
-				return false
-			}
-
-			hashMap[rKey] = true
-			hashMap[cKey] = true
-			hashMap[sqreKey] = true
 		}
 	}
-
 	return true
 }
